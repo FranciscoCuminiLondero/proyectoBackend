@@ -1,0 +1,15 @@
+{
+  "name": "backend-proyect",
+  "version": "1.0.0",
+  "description": "Es un proyecto para el curso de CoderHouse sobre backend.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francisco Cumini Londero",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
