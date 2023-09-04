@@ -24,8 +24,8 @@ class ProductManager {
         }
     }
 
-    addProduct(title, description, price, thumbnail, code, stock) {
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
+    addProduct(title, description, price, code, stock, category, thumbnails = []) {
+        if (!title || !description || !price || !code || stock === undefined || !category) {
             console.log('Todos los datos son obligatorios');
             return;
         }
@@ -37,23 +37,19 @@ class ProductManager {
         }
 
         let newProduct = {
+            id: this.generateUniqueId(),
             title,
             description,
             price,
-            thumbnail,
             code,
+            status: true,
             stock,
+            category,
+            thumbnails,
         };
-
-        const lastProduct = this.products[this.products.length - 1];
-        newProduct.id = lastProduct ? lastProduct.id + 1 : 1;
 
         this.products.push(newProduct);
         this.saveProductsToFile();
-    }
-
-    getProducts() {
-        return this.products;
     }
 
     getProducts(limit) {
@@ -62,7 +58,7 @@ class ProductManager {
         }
 
         let productsToReturn = this.products;
-        
+
         if (limit !== undefined) {
             productsToReturn = this.products.slice(0, limit);
         }
@@ -107,6 +103,10 @@ class ProductManager {
 
         this.products.splice(productIndex, 1);
         this.saveProductsToFile();
+    }
+
+    generateUniqueId() {
+        return Date.now().toString();
     }
 }
 
